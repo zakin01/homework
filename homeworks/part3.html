@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/parts.css">
+
+    <script type="text/javascript" src="./js/jquery-2.2.3.min.js"></script>
+    <script type="text/javascript" src="./js/strive.js"></script>
+    <script type="text/javascript" src="./js/menuFullpage.min.js"></script>
+    <script type="text/javascript" src="./js/SmoothScroll.min.js "></script>
+
+    <title>Part3</title>
+</head>
+
+<body>
+    <video class="bg" src="./img/bg.mp4" autoplay loop muted></video>
+
+    <header>
+        <a href="#menu" class="menu-link">
+            <span>toggle menu</span>
+        </a>
+        <nav id="menu" class="panel">
+            <ul>
+                <li>
+                    <a href="./index.html" class="active">Home</a>
+                </li>
+                <li>
+                    <a href="./part1.html">Part1</a>
+                </li>
+                <li>
+                    <a href="./part2.html">Part2</a>
+                </li>
+                <li>
+                    <a href="./part3.html">Part3</a>
+                </li>
+                <li>
+                    <a href="./part4.html">Part4</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <img id="icon" src="./img/animat-responsive-color.gif" alt="" width="150px" height="150px">
+
+    <div class="content3">
+        <img id="img1" src="./img/fig1.png" alt="" width="20%" height="50%">
+        <p id="p1"></p>
+        <img id="img2" src="./img/fig2.png" alt="" width="20%" height="50%">
+        <p id="p2"></p>
+    </div>
+    <div id="demo"></div>
+    <a class="home" href="./index.html"><img src="./img/return.png" alt="" width="50px" height="50px"></a>
+
+    <script>
+        var str1 = "我对计算机的认识是逐步建立起来的。我们这一代也算是正赶上了计算机在中国飞速发展的时间。从一开始接触计算机，将图标拷贝回家以为就能使用这些软件，到现在了解了计算机的一些基本原理。我对计算机的认识和“越学越知道自己的无知”无形中契合了起来。除去接触较多的各种编程语言以及算法等，硬件设计、如何提升性能等，再到如今非常火爆的人工智能，都是很深奥的问题。"
+        var i = 0;
+        function typing1() {
+            var p1 = document.getElementById('p1')
+            if (i <= str1.length) {
+                p1.innerHTML = str1.slice(0, i++);
+                setTimeout("typing1()", 50)
+            } else {
+                p1.innerHTML = str1;
+            }
+        }
+        typing1();
+    </script>
+    <script>
+        var str2 = "当然现在现在无论身处何处计算机的重要性已经不言而喻了，它给生活工作带来的便利 已经数不胜数，我认为说计算机成就了现在这样一个时代也不为过。"
+        var j = 0;
+        function typing2() {
+            var p2 = document.getElementById('p2')
+            if (j <= str2.length) {
+                p2.innerHTML = str2.slice(0, j++);
+                setTimeout("typing2()", 50)
+            } else {
+                p2.innerHTML = str2;
+            }
+        }
+        typing2();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="./css/index.css">
+    <link rel="stylesheet" type="text/css" href="./css/parts.css">
+
+    <script type="text/javascript" src="./js/vis-network.min.js"></script>
+    <script type="text/javascript" src="./js/jquery-2.2.3.min.js"></script>
+    <script type="text/javascript" src="./js/strive.js"></script>
+    <script type="text/javascript" src="./js/menuFullpage.min.js"></script>
+    <script type="text/javascript" src="./js/SmoothScroll.min.js "></script>
+
+    <title>Part1</title>
+</head>
+
+<body>
+    <video class="bg" src="./img/bg.mp4" autoplay loop muted></video>
+
+    <header>
+        <a href="#menu" class="menu-link">
+            <span>toggle menu</span>
+        </a>
+        <nav id="menu" class="panel">
+            <ul>
+                <li>
+                    <a href="./index.html" class="active">Home</a>
+                </li>
+                <li>
+                    <a href="./part1.html">Part1</a>
+                </li>
+                <li>
+                    <a href="./part2.html">Part2</a>
+                </li>
+                <li>
+                    <a href="./part3.html">Part3</a>
+                </li>
+                <li>
+                    <a href="./part4.html">Part4</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    
+    <img id="icon" src="./img/animat-linechart-color.gif" alt="" width="150px" height="150px">
+
+    <div id="mynetwork"></div>
+
+    <script type="text/javascript">
+        // 获取容器
+        var container = document.getElementById('mynetwork');
+
+        // 创建节点数据数组
+        var nodes = new vis.DataSet([
+            { id: 1, label: "大学物理" },
+            { id: 2, label: "高等数学" },
+            { id: 3, label: "线性代数" },
+            { id: 4, label: "电路" },
+            { id: 5, label: "计算机科学导论" },
+            { id: 6, label: "模拟电子技术" },
+            { id: 7, label: "数字逻辑电路" },
+            { id: 8, label: "离散数学" },
+            { id: 9, label: "计算机组成" },
+            { id: 10, label: "数据结构与算法" },
+            { id: 11, label: "程序设计基础" },
+            { id: 12, label: "操作系统原理" },
+            { id: 13, label: "汇编语言" },
+            { id: 14, label: "计算机网络" }
+        ]);
+
+        // 创建边数据数组
+        var edges = new vis.DataSet([
+            { from: 1, to: 4 },
+            { from: 2, to: 8 },
+            { from: 3, to: 8 },
+            { from: 4, to: 6 },
+            { from: 4, to: 7 },
+            { from: 5, to: 9 },
+            { from: 5, to: 10 },
+            { from: 5, to: 11 },
+            { from: 6, to: 9 },
+            { from: 7, to: 9 },
+            { from: 8, to: 10 },
+            { from: 9, to: 13 },
+            { from: 9, to: 12 },
+            { from: 9, to: 14 },
+            { from: 10, to: 12 },
+            { from: 11, to: 12 },
+            { from: 11, to: 14 },
+            { from: 12, to: 14 },
+            { from: 13, to: 12 },
+        ]);
+
+        // 将数据赋值给vis 数据格式化器
+        var data = {
+            nodes: nodes,
+            edges: edges
+        };
+
+        var options = {
+            nodes: {
+                borderWidth: 1,
+                borderWidthSelected: 2,
+                brokenImage: undefined,
+                chosen: true,
+                color: {
+                    border: '#2B7CE9',
+                    background: '#97C2FC',
+                    highlight: {
+                        border: '#2B7CE9',
+                        background: '#D2E5FF'
+                    },
+                    hover: {
+                        border: '#2B7CE9',
+                        background: '#D2E5FF'
+                    }
+                },
+                opacity: 1,
+                fixed: {
+                    x: false,
+                    y: false
+                },
+                font: {
+                    color: '#343434',
+                    size: 14, // px
+                    face: 'arial',
+                    background: 'none',
+                    strokeWidth: 0, // px
+                    strokeColor: '#ffffff',
+                    align: 'center',
+                    multi: false,
+                    vadjust: 0,
+                    bold: {
+                        color: '#343434',
+                        size: 14, // px
+                        face: 'arial',
+                        vadjust: 0,
+                        mod: 'bold'
+                    },
+                    ital: {
+                        color: '#343434',
+                        size: 14, // px
+                        face: 'arial',
+                        vadjust: 0,
+                        mod: 'italic',
+                    },
+                    boldital: {
+                        color: '#343434',
+                        size: 14, // px
+                        face: 'arial',
+                        vadjust: 0,
+                        mod: 'bold italic'
+                    },
+                    mono: {
+                        color: '#343434',
+                        size: 15, // px
+                        face: 'courier new',
+                        vadjust: 2,
+                        mod: ''
+                    }
+                },
+                group: undefined,
+                heightConstraint: false,
+                hidden: false,
+                icon: {
+                    face: 'FontAwesome',
+                    code: undefined,
+                    weight: undefined,
+                    size: 50,  //50,
+                    color: '#2B7CE9'
+                },
+                image: undefined,
+                imagePadding: {
+                    left: 0,
+                    top: 0,
+                    bottom: 0,
+                    right: 0
+                },
+                label: undefined,
+                labelHighlightBold: true,
+                level: undefined,
+                mass: 1,
+                physics: true,
+                scaling: {
+                    min: 10,
+                    max: 30,
+                    label: {
+                        enabled: false,
+                        min: 14,
+                        max: 30,
+                        maxVisible: 30,
+                        drawThreshold: 5
+                    },
+                    customScalingFunction: function (min, max, total, value) {
+                        if (max === min) {
+                            return 0.5;
+                        }
+                        else {
+                            let scale = 1 / (max - min);
+                            return Math.max(0, (value - min) * scale);
+                        }
+                    }
+                },
+                shadow: {
+                    enabled: false,
+                    color: 'rgba(0,0,0,0.5)',
+                    size: 10,
+                    x: 5,
+                    y: 5
+                },
+                shape: 'ellipse',
+                shapeProperties: {
+                    borderDashes: false, // only for borders
+                    borderRadius: 6,     // only for box shape
+                    interpolation: false,  // only for image and circularImage shapes
+                    useImageSize: false,  // only for image and circularImage shapes
+                    useBorderWithImage: false  // only for image shape
+                },
+                size: 25,
+                title: undefined,
+                value: undefined,
+                widthConstraint: false,
+                x: undefined,
+                y: undefined
+            },
+            edges: {
+                arrows: {
+                    to: {
+                        enabled: true,
+                        imageHeight: undefined,
+                        imageWidth: undefined,
+                        scaleFactor: 1,
+                        src: undefined,
+                        type: "arrow"
+                    },
+                    middle: {
+                        enabled: false,
+                        imageHeight: 32,
+                        imageWidth: 32,
+                        scaleFactor: 1,
+                        src: undefined,
+                        type: "image"
+                    },
+                    from: {
+                        enabled: false,
+                        imageHeight: undefined,
+                        imageWidth: undefined,
+                        scaleFactor: 1,
+                        src: undefined,
+                        type: "arrow"
+                    }
+                },
+                arrowStrikethrough: true,
+                chosen: true,
+                color: {
+                    color: '#848484',
+                    highlight: '#848484',
+                    hover: '#848484',
+                    inherit: 'from',
+                    opacity: 1.0
+                },
+                dashes: false,
+                font: {
+                    color: '#343434',
+                    size: 14, // px
+                    face: 'arial',
+                    background: 'none',
+                    strokeWidth: 2, // px
+                    strokeColor: '#ffffff',
+                    align: 'horizontal',
+                    multi: false,
+                    vadjust: 0,
+                    bold: {
+                        color: '#343434',
+                        size: 14, // px
+                        face: 'arial',
+                        vadjust: 0,
+                        mod: 'bold'
+                    },
+                    ital: {
+                        color: '#343434',
+                        size: 14, // px
+                        face: 'arial',
+                        vadjust: 0,
+                        mod: 'italic',
+                    },
+                    boldital: {
+                        color: '#343434',
+                        size: 14, // px
+                        face: 'arial',
+                        vadjust: 0,
+                        mod: 'bold italic'
+                    },
+                    mono: {
+                        color: '#343434',
+                        size: 15, // px
+                        face: 'courier new',
+                        vadjust: 2,
+                        mod: ''
+                    }
+                },
+                hidden: false,
+                hoverWidth: 1.5,
+                label: undefined,
+                labelHighlightBold: true,
+                length: undefined,
+                physics: true,
+                scaling: {
+                    min: 1,
+                    max: 15,
+                    label: {
+                        enabled: true,
+                        min: 14,
+                        max: 30,
+                        maxVisible: 30,
+                        drawThreshold: 5
+                    },
+                    customScalingFunction: function (min, max, total, value) {
+                        if (max === min) {
+                            return 0.5;
+                        }
+                        else {
+                            var scale = 1 / (max - min);
+                            return Math.max(0, (value - min) * scale);
+                        }
+                    }
+                },
+                selectionWidth: 1,
+                selfReferenceSize: 20,
+                selfReference: {
+                    size: 20,
+                    angle: Math.PI / 4,
+                    renderBehindTheNode: true
+                },
+                shadow: {
+                    enabled: false,
+                    color: 'rgba(0,0,0,0.5)',
+                    size: 10,
+                    x: 5,
+                    y: 5
+                },
+                smooth: {
+                    enabled: true,
+                    type: "dynamic",
+                    roundness: 0.5
+                },
+                title: undefined,
+                value: undefined,
+                width: 1,
+                widthConstraint: false
+            },
+            layout: {
+                randomSeed: undefined,
+                improvedLayout: true,
+                clusterThreshold: 150,
+                hierarchical: {
+                    enabled: false,
+                    levelSeparation: 150,
+                    nodeSpacing: 100,
+                    treeSpacing: 200,
+                    blockShifting: true,
+                    edgeMinimization: true,
+                    parentCentralization: true,
+                    direction: 'UD',        // UD, DU, LR, RL
+                    sortMethod: 'hubsize',  // hubsize, directed
+                    shakeTowards: 'leaves'  // roots, leaves
+                }
+            }
+        };
+
+        // 初始化关系图
+        var network = new vis.Network(container, data, options);
+    </script>
+
+    <a class="home" href="./index.html"><img src="./img/return.png" alt="" width="50px" height="50px"></a>
+
+
+</body>
+
+</html>
